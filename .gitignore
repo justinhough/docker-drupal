@@ -150,3 +150,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+### Repo Specific ###
+data/
+drupal/
