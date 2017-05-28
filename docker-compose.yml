@@ -1,0 +1,31 @@
+# Drupal with MySQL
+version: '2'
+
+services:
+
+  drupal:
+    image: drupal:8.3.2-apache
+    links:
+      - mysql:mysql
+    ports:
+      - 8080:80
+    volumes:
+      - ./drupal/modules:/var/www/html/modules
+      - ./drupal/profiles:/var/www/html/profiles
+      - ./drupal/themes:/var/www/html/themes
+      - ./drupal/sites:/var/www/html/sites
+    restart: always
+
+  ## Install Drupal for mysql
+  # In Advanced Options, change `localhost` to `mysql`
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./data:/var/lib/mysql
